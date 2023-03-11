@@ -3,8 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Collapse from "react-bootstrap/Collapse";
 import "./Header.css";
+import { ReactComponent as FaceLogo } from "./../assets/images/facebook.svg";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fafacebook } from "@fortawesome/free-solid-svg-icons";
+
 export default function Header(props) {
-  const { setUserPost, users, setUsers } = props;
+  const { setUserPost, users, setUsers, active, setActive } = props;
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     axios.get(`https://jsonplaceholder.typicode.com/users`).then((res) => {
@@ -12,7 +18,6 @@ export default function Header(props) {
     });
   }, []);
 
-  const [open, setOpen] = useState(false);
   return (
     <header class="tm-header" id="tm-header">
       <div class="tm-header-wrapper">
@@ -29,27 +34,38 @@ export default function Header(props) {
           </div>
           <h1 class="text-center">Blog Posts</h1>
         </div>
-        <nav class="tm-nav" id="tm-nav">
+        <nav class="tm-nav">
           <ul>
-            <li class="tm-nav-item active">
-              <a href="index.html" class="tm-nav-link">
+            <li
+              class={`tm-nav-item ${active === "all users" ? "active" : ""} `}
+            >
+              <a
+                href="index.html"
+                class="tm-nav-link"
+                onClick={() => {
+                  setActive("all users");
+                }}
+              >
                 <i class="fas fa-home"></i>
                 All Users Posts
               </a>
             </li>
-            <li class="tm-nav-item">
+            <li class={`tm-nav-item-2 ${active === "users" ? "active" : ""} `}>
               <button
-                class="btn btn-toggle align-items-center rounded collapsed tm-nav-link"
+                class="btn btn-toggle align-items-center collapsed tm-nav-link"
                 data-bs-toggle="collapse"
                 aria-controls="example-collapse-text"
                 aria-expanded={open}
-                onClick={() => setOpen(!open)}
+                onClick={() => {
+                  setOpen(!open);
+                  setActive("users");
+                }}
               >
                 Users
               </button>
               <Collapse in={open}>
                 <div id="example-collapse-text">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ">
                     {users?.map((user) => {
                       return (
                         <div>
@@ -57,9 +73,8 @@ export default function Header(props) {
                             onClick={() => {
                               setUserPost(user.id);
                             }}
-                            class="tm-nav-link"
+                            class="tm-nav-link-2"
                           >
-                            {" "}
                             <li>{user.name}</li>
                           </a>
                         </div>
@@ -69,38 +84,20 @@ export default function Header(props) {
                 </div>
               </Collapse>
             </li>
-            <li class="tm-nav-item">
-              <a href="about.html" class="tm-nav-link">
+            <li class={`tm-nav-item ${active === "about" ? "active" : ""} `}>
+              <a class="tm-nav-link" onClick={() => setActive("about")}>
                 <i class="fas fa-users"></i>
                 About
               </a>
             </li>
-            <li class="tm-nav-item">
-              <a href="contact.html" class="tm-nav-link">
+            <li class={`tm-nav-item ${active === "contact" ? "active" : ""} `}>
+              <a class="tm-nav-link" onClick={() => setActive("contact")}>
                 <i class="far fa-comments"></i>
                 Contact Us
               </a>
             </li>
           </ul>
         </nav>
-        <div class="tm-mb-65">
-          <a
-            rel="nofollow"
-            href="https://fb.com/templatemo"
-            class="tm-social-link"
-          >
-            <i class="fab fa-facebook tm-social-icon"></i>
-          </a>
-          <a href="https://twitter.com" class="tm-social-link">
-            <i class="fab fa-twitter tm-social-icon"></i>
-          </a>
-          <a href="https://instagram.com" class="tm-social-link">
-            <i class="fab fa-instagram tm-social-icon"></i>
-          </a>
-          <a href="https://linkedin.com" class="tm-social-link">
-            <i class="fab fa-linkedin tm-social-icon"></i>
-          </a>
-        </div>
       </div>
     </header>
   );

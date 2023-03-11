@@ -29,3 +29,129 @@
   margin-top: 50px;
   margin-bottom: 115px;
 }
+.tm-nav {
+  margin-bottom: 100px;
+}
+
+.tm-nav-item {
+  list-style: none;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+.tm-nav-item-2 {
+  list-style: none;
+  text-decoration: underline;
+  margin-bottom: 30px;
+  display: block;
+  margin-left: 73px;
+}
+.tm-nav-link {
+  color: white;
+  background-color: transparent;
+  height: 75px;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  padding: 30px;
+}
+.tm-nav-link-2 {
+  color: white;
+  background-color: transparent;
+  list-style: none;
+  height: 75px;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  padding: 30px;
+  cursor: pointer;
+}
+.tm-nav-item:hover .tm-nav-link,
+.tm-nav-item.active .tm-nav-link {
+  color: #0cc;
+  background-color: white;
+  text-decoration: none;
+}
+.tm-nav-item-2.active,
+.tm-nav-item-2:hover {
+  color: #0cc;
+  background-color: white;
+  text-decoration: none;
+}
+.tm-nav ul {
+  position: relative;
+}
+.tm-nav-item-2:hover .tm-nav-link-2,
+.tm-nav-item-2.active .tm-nav-link-2 {
+  color: white;
+  background-color: #0cc;
+}
+.tm-nav-item-2:hover .tm-nav-link,
+.tm-nav-item-2.active .tm-nav-link {
+  color: #0cc;
+  background-color: white;
+}
+
+.tm-nav-item:hover:after,
+.tm-nav-item.active:after {
+  content: "";
+  width: 100%;
+  max-width: 300px;
+  height: 75px;
+  display: block;
+  border: 1px solid white;
+  margin-left: 10px;
+
+  position: absolute;
+  z-index: -1000;
+}
+
+.tm-nav-link i {
+  margin-right: 37px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.tm-nav {
+  margin-left: -30px;
+}
+
+.tm-social-link {
+  display: inline-block;
+  background-color: white;
+  font-size: 0.5rem;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.tm-social-icon {
+  color: #0cc;
+  transition: all 0.3s ease;
+}
+
+.tm-social-link:hover .tm-social-icon.fa-facebook {
+  color: #3b5998;
+}
+.tm-social-link:hover .tm-social-icon.fa-twitter {
+  color: #00acee;
+}
+.tm-social-link:hover .tm-social-icon.fa-instagram {
+  color: #3f729b;
+}
+.tm-social-link:hover .tm-social-icon.fa-linkedin {
+  color: #0e76a8;
+}
+.navbar-toggler {
+  display: none;
+}

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Post.css";
+import commentImg from "./../../assets/images/comment-1.jpg";
+
 export default function Post(props) {
   const [postDetails, setPostDetails] = useState(null);
   const [ownedUser, setOwnedUser] = useState(null);
@@ -55,25 +57,6 @@ export default function Post(props) {
               </li>
             </ul>
           </nav>
-          <div class="tm-mb-65">
-            <a href="https://facebook.com" class="tm-social-link">
-              <i class="fab fa-facebook tm-social-icon"></i>
-            </a>
-            <a href="https://twitter.com" class="tm-social-link">
-              <i class="fab fa-twitter tm-social-icon"></i>
-            </a>
-            <a href="https://instagram.com" class="tm-social-link">
-              <i class="fab fa-instagram tm-social-icon"></i>
-            </a>
-            <a href="https://linkedin.com" class="tm-social-link">
-              <i class="fab fa-linkedin tm-social-icon"></i>
-            </a>
-          </div>
-          <p class="tm-mb-80 pr-5 text-white">
-            Xtra Blog is a multi-purpose HTML template from TemplateMo website.
-            Left side is a sticky menu bar. Right side content will scroll up
-            and down.
-          </p>
         </div>
       </header>
       <div class="container-fluid">
@@ -109,7 +92,7 @@ export default function Post(props) {
                       <div class="tm-comment tm-mb-45">
                         <figure class="tm-comment-figure col-4">
                           <img
-                            src="img/comment-1.jpg"
+                            src={commentImg}
                             alt="Image"
                             class="mb-2 rounded-circle img-thumbnail"
                           />
@@ -194,46 +177,6 @@ export default function Post(props) {
                     </a>
                   </li>
                 </ul>
-                <hr class="mb-3 tm-hr-primary" />
-                <h2 class="tm-mb-40 tm-post-title tm-color-primary">
-                  Related Posts
-                </h2>
-                <a href="#" class="d-block tm-mb-40">
-                  <figure>
-                    <img
-                      src="img/img-02.jpg"
-                      alt="Image"
-                      class="mb-3 img-fluid"
-                    />
-                    <figcaption class="tm-color-primary">
-                      Duis mollis diam nec ex viverra scelerisque a sit
-                    </figcaption>
-                  </figure>
-                </a>
-                <a href="#" class="d-block tm-mb-40">
-                  <figure>
-                    <img
-                      src="img/img-05.jpg"
-                      alt="Image"
-                      class="mb-3 img-fluid"
-                    />
-                    <figcaption class="tm-color-primary">
-                      Integer quis lectus eget justo ullamcorper ullamcorper
-                    </figcaption>
-                  </figure>
-                </a>
-                <a href="#" class="d-block tm-mb-40">
-                  <figure>
-                    <img
-                      src="img/img-06.jpg"
-                      alt="Image"
-                      class="mb-3 img-fluid"
-                    />
-                    <figcaption class="tm-color-primary">
-                      Nam lobortis nunc sed faucibus commodo
-                    </figcaption>
-                  </figure>
-                </a>
               </div>
             </aside>
           </div>
@@ -248,9 +191,6 @@ export default function Post(props) {
               >
                 TemplateMo
               </a>
-            </div>
-            <div class="col-md-6 col-12 tm-color-gray tm-copyright">
-              Copyright 2020 Xtra Blog Company Co. Ltd.
             </div>
           </footer>
         </main>

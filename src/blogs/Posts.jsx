@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "./Posts.css";
 import Post from "./components/Post";
+import img from "./../assets/images/img-01.jpg";
+
 export default function Posts(props) {
   const [postList, setPostList] = useState(null);
   const [postID, setPostID] = useState(null);
@@ -11,14 +13,16 @@ export default function Posts(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(9);
   const [searchPost, setSearchPost] = useState(null);
-  const { userPosts, users } = props;
+  const { userPosts, users, active } = props;
 
   const [searchSubmit, setSearchSubmit] = useState(false);
 
   useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/posts`).then((res) => {
-      setPostList(res.data);
-    });
+    if (active === "all users") {
+      axios.get(`https://jsonplaceholder.typicode.com/posts`).then((res) => {
+        setPostList(res.data);
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -32,9 +36,18 @@ export default function Posts(props) {
   }, [userPosts]);
 
   useEffect(() => {
-    if (searchPost !== null && searchSubmit === true) {
+    if (searchPost !== null && searchSubmit === true && active !== "users") {
       axios
         .get(`https://jsonplaceholder.typicode.com/posts?q=${searchPost}`)
+        .then((res) => {
+          setPostList(res.data);
+          setSearchSubmit(false);
+        });
+    } else if (searchPost !== null && searchSubmit === true) {
+      axios
+        .get(
+          `https://jsonplaceholder.typicode.com/posts?q=${searchPost}&userId=${userPosts}`
+        )
         .then((res) => {
           setPostList(res.data);
           setSearchSubmit(false);
@@ -97,7 +110,7 @@ export default function Posts(props) {
                     class="effect-lily tm-post-link tm-pt-60"
                   >
                     <div class="tm-post-link-inner">
-                      <img src="img/img-01.jpg" alt="Image" class="img-fluid" />
+                      <img src={img} alt="Image" class="img-fluid" />
                     </div>
 
                     <h2 class="tm-pt-30 tm-color-primary tm-post-title">
