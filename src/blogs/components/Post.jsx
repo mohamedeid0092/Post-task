@@ -7,6 +7,10 @@ export default function Post(props) {
   const [postDetails, setPostDetails] = useState(null);
   const [ownedUser, setOwnedUser] = useState(null);
   const [postComments, setPostComments] = useState([]);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [comment, setComment] = useState("");
+
   const { postID, users } = props;
 
   useEffect(() => {
@@ -24,6 +28,20 @@ export default function Post(props) {
         setPostComments(res.data);
       });
   }, [postID]);
+
+  const handleSubmit = () => {
+    axios
+      .post(`https://jsonplaceholder.typicode.com/posts/${postID}/comments/`, {
+        name: name,
+        email: email,
+        body: comment,
+      })
+      .then((res) => {
+        console.log(res);
+
+        setPostComments((prev) => [...prev, res.data]);
+      });
+  };
 
   useEffect(() => {
     if (postDetails)
@@ -120,20 +138,44 @@ export default function Post(props) {
                       Your comment
                     </h2>
                     <div class="mb-4">
-                      <input class="form-control" name="name" type="text" />
+                      <p> Your email</p>
+                      <input
+                        class="form-control"
+                        name="name"
+                        type="text"
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                      />
                     </div>
                     <div class="mb-4">
-                      <input class="form-control" name="email" type="text" />
+                      <p> Name</p>
+                      <input
+                        class="form-control"
+                        name="email"
+                        type="text"
+                        onChange={(e) => {
+                          setName(e.target.value);
+                        }}
+                      />
                     </div>
                     <div class="mb-4">
+                      <p> Your Comment</p>
                       <textarea
                         class="form-control"
                         name="message"
                         rows="6"
+                        onChange={(e) => {
+                          setComment(e.target.value);
+                        }}
                       ></textarea>
                     </div>
                     <div class="text-right">
-                      <button class="tm-btn tm-btn-primary tm-btn-small">
+                      <button
+                        class="tm-btn tm-btn-primary tm-btn-small"
+                        type="button"
+                        onClick={handleSubmit}
+                      >
                         Submit
                       </button>
                     </div>
